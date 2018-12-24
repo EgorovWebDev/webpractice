@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<body>
+<script>
+
+
+    let arr = [
+        {
+            a: 1,
+            b: 2,
+            c: 3
+        },
+        {
+            a: 1
+        },
+        {
+            a: 1,
+            b: (a) => {
+                console.log(a)
+            },
+            c: 3,
+            d: 4,
+            e: 5
+        }
+    ]
+
+    let foo = (a) => {
+        let max = 0,
+            maxEl = a[0];
+
+        for (let i of a) {
+            let count = 0;
+            for (let j in i) {
+                if (typeof i[j] !== 'function') {
+                    count++
+                }
+            }
+            if (max < count) {
+                max = count;
+                maxEl = i
+            }
+        }
+        let callback,
+            last = a[a.length - 1];
+        for (let i in last) {
+            if (typeof last[i] === 'function') {
+                callback = last[i];
+                break
+            }
+        }
+
+        callback(this);
+
+        return maxEl
+    }
+
+    console.log(foo(arr))
+
+
+
+
+
+</script>    
+</body>
+</html>
